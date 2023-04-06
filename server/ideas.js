@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase } = require('./db');
+const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase, deleteFromDatabasebyId } = require('./db');
 const ideaRouter = express.Router();
 
 ideaRouter.param(':ideaId', (req, res, next, id) => {
@@ -31,5 +31,14 @@ ideaRouter.put('/:ideaId', (req, res, next) => {
     res.send(updatedIdeaInstance);
 })
 
+ideaRouter.delete('/:minionId', (req, res, next) => {
+    const deleted = deleteFromDatabasebyId('ideas', req.params.minionId);
+    if(deleted) {
+        res.status(204);
+    } else {
+        res.status(500);
+    }
+    res.send();
+})
 
 module.exports = ideaRouter;
