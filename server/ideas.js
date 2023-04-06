@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllFromDatabase, getFromDatabaseById, addToDatabase } = require('./db');
+const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase } = require('./db');
 const ideaRouter = express.Router();
 
 ideaRouter.param(':ideaId', (req, res, next, id) => {
@@ -25,5 +25,11 @@ ideaRouter.post('/', (req, res, next) => {
 ideaRouter.get('/:ideaId', (req, res, next) => {
     res.send(req.idea);
 })
+
+ideaRouter.put('/:ideaId', (req, res, next) => {
+    let updatedIdeaInstance = updateInstanceInDatabase('ideas', req.body);
+    res.send(updatedIdeaInstance);
+})
+
 
 module.exports = ideaRouter;
