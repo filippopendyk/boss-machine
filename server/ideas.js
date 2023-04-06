@@ -31,8 +31,8 @@ ideaRouter.put('/:ideaId', (req, res, next) => {
     res.send(updatedIdeaInstance);
 })
 
-ideaRouter.delete('/:minionId', (req, res, next) => {
-    const deleted = deleteFromDatabasebyId('ideas', req.params.minionId);
+ideaRouter.delete('/:ideaId', (req, res, next) => {
+    const deleted = deleteFromDatabasebyId('ideas', req.params.ideaId);
     if(deleted) {
         res.status(204);
     } else {
